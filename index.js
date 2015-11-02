@@ -19,7 +19,7 @@ WeatherBot.prototype.getWeather = function (location, callback) {
         });
         res.on('end', function () {
             var result = JSON.parse(resData);
-            if (result.query.results.channel instanceof Array) {
+            if (Array.isArray(result.query.results.channel)) {
                 var returnMessage = result.query.results.channel[0].item.title + '\n`Current` ' + result.query.results.channel[0].item.condition.temp + ' degrees, ' + result.query.results.channel[0].item.condition.text + '\n`' + result.query.results.channel[0].item.forecast[0].day + '` High: ' + result.query.results.channel[0].item.forecast[0].high + ' Low: ' + result.query.results.channel[0].item.forecast[0].low + ', ' + result.query.results.channel[0].item.forecast[0].text + '\n`' + result.query.results.channel[0].item.forecast[1].day + '` High: ' + result.query.results.channel[0].item.forecast[1].high + ' Low: ' + result.query.results.channel[0].item.forecast[1].low + ', ' + result.query.results.channel[0].item.forecast[1].text;
                 callback(null, returnMessage);
             } else {
